@@ -50,3 +50,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(setq create-lockfiles nil)
+(setq auto-save-default nil)
+(setq backup-inhibited t)
+
+(projectile-global-mode)
+
+(blink-cursor-mode 0)
+
+(setq ring-bell-function 'ignore)
+
+(add-hook 'clojure-mode-hook 'enable-paredit-mode)
