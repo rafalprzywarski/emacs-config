@@ -63,3 +63,9 @@
 (setq ring-bell-function 'ignore)
 
 (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+(add-to-list 'auto-mode-alist '("\\.cleo\\'" . clojure-mode))
+(setq-default indent-tabs-mode nil)
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
