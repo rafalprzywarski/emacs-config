@@ -13,7 +13,10 @@
 (setq mouse-wheel-scroll-amount '(1))
 
 (set-language-environment "UTF-8")
-(set-default-font "Source Code Pro-14")
+(set-default-font
+ (if (string-match "MBP" system-name)
+     "Source Code Pro-10"
+     "Source Code Pro-13"))
 
 (setq-default comment-column 70)
 (setq-default line-spacing 2)
