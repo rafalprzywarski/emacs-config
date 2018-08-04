@@ -5,6 +5,8 @@
              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
 
+(global-auto-revert-mode t)
+
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
 
