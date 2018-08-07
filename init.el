@@ -18,6 +18,17 @@
      "Source Code Pro-10"
      "Source Code Pro-13"))
 
+(setq mac-function-modifier 'hyper)
+(setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'control)
+(setq mac-control-modifier 'super)
+(define-key global-map (kbd "H-j") 'left-char)
+(define-key global-map (kbd "H-l") 'right-char)
+(define-key global-map (kbd "H-k") 'next-line)
+(define-key global-map (kbd "H-i") 'previous-line)
+(define-key global-map (kbd "H-M-j") 'left-word)
+(define-key global-map (kbd "H-M-l") 'right-word)
+
 (setq-default comment-column 70)
 (setq-default line-spacing 2)
 
