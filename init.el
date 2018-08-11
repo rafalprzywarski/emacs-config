@@ -6,6 +6,7 @@
 (package-initialize)
 
 (global-auto-revert-mode t)
+(setq inhibit-startup-screen t)
 
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
