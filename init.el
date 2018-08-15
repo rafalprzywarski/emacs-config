@@ -15,7 +15,7 @@
 
 (set-language-environment "UTF-8")
 (set-default-font
- (if (string-match "MBP" system-name)
+ (if (string-match "MacBook" system-name)
      "Source Code Pro-10"
      "Source Code Pro-13"))
 
