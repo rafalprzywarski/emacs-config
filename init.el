@@ -59,7 +59,7 @@
  '(markdown-command "pandoc")
  '(package-selected-packages
    (quote
-    (markdown-mode magit paredit projectile smooth-scrolling helm-ag highlight-symbol rainbow-delimiters monokai-theme company cider))))
+    (ninja-mode markdown-mode magit paredit projectile smooth-scrolling helm-ag highlight-symbol rainbow-delimiters monokai-theme company cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
