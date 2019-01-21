@@ -15,8 +15,8 @@
 
 (set-language-environment "UTF-8")
 (set-default-font
- (if (string-match "MacBook" system-name)
-     "Source Code Pro-10"
+ (if (string-match "MBP" system-name)
+     "Iosevka-11"
      "Iosevka-13") nil t)
 
 (setq mac-function-modifier 'hyper)
