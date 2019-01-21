@@ -17,7 +17,7 @@
 (set-default-font
  (if (string-match "MacBook" system-name)
      "Source Code Pro-10"
-     "Source Code Pro-13") nil t)
+     "Iosevka-13") nil t)
 
 (setq mac-function-modifier 'hyper)
 (define-key global-map (kbd "H-j") 'left-char)
