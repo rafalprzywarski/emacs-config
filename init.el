@@ -13,6 +13,8 @@
 
 (setq mouse-wheel-scroll-amount '(1))
 
+(windmove-default-keybindings 'super)
+
 (set-language-environment "UTF-8")
 (set-default-font
  (if (string-match "MBP" system-name)
