@@ -86,3 +86,10 @@
       c-basic-offset 4)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(setq load-path (cons "~/.emacs.d/glsl-mode" load-path))
+(autoload 'glsl-mode "glsl-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.geom\\'" . glsl-mode))
