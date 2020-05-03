@@ -97,3 +97,8 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
+
+(setq load-path (cons "/usr/local/Cellar/erlang/22.3.2/lib/erlang/lib/tools-3.3.1/emacs" load-path))
+(setq erlang-root-dir "/usr/local/Cellar/erlang/22.3.2")
+(setq exec-path (cons "/usr/local/Cellar/erlang/22.3.2/bin" exec-path))
+(require 'erlang-start)
