@@ -16,7 +16,7 @@
 (windmove-default-keybindings 'super)
 
 (set-language-environment "UTF-8")
-(set-default-font
+(set-frame-font
  (if (string-match "MBP" system-name)
      "Iosevka-11"
      "Iosevka-13") nil t)
