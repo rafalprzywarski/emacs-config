@@ -61,7 +61,7 @@
  '(markdown-command "pandoc")
  '(package-selected-packages
    (quote
-    (ninja-mode markdown-mode magit paredit projectile smooth-scrolling helm-ag highlight-symbol rainbow-delimiters monokai-theme company cider))))
+    (exec-path-from-shell ninja-mode markdown-mode magit paredit projectile smooth-scrolling helm-ag highlight-symbol rainbow-delimiters monokai-theme company cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -97,3 +97,6 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
