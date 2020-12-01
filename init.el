@@ -29,6 +29,11 @@
 (define-key global-map (kbd "H-M-j") 'left-word)
 (define-key global-map (kbd "H-M-l") 'right-word)
 
+(global-set-key (kbd "C-?") 'help-command)
+(global-set-key (kbd "S-h") 'mark-paragraph)
+(global-set-key (kbd "C-h") 'delete-backward-char)
+(global-set-key (kbd "M-h") 'backward-kill-word)
+
 (setq-default comment-column 70)
 (setq-default line-spacing 2)
 
@@ -98,7 +103,16 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
 
-(setq load-path (cons "/usr/local/Cellar/erlang/22.3.2/lib/erlang/lib/tools-3.3.1/emacs" load-path))
-(setq erlang-root-dir "/usr/local/Cellar/erlang/22.3.2")
-(setq exec-path (cons "/usr/local/Cellar/erlang/22.3.2/bin" exec-path))
+(let ((up (lambda (p) (directory-file-name (file-name-directory p)))))
+  (let* ((bin-path
+          (funcall up (file-truename "/usr/local/bin/erl")))
+         (root-path
+          (funcall up (funcall up (funcall up bin-path))))
+         (erl-load-path
+          (car (file-expand-wildcards (concat root-path "/lib/erlang/lib/tools-*/emacs")))))
+    (setq load-path (cons erl-load-path load-path))
+    (setq erlang-root-dir root-path)
+    (setq exec-path (cons bin-path exec-path))))
+
 (require 'erlang-start)
+(put 'downcase-region 'disabled nil)
