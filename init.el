@@ -37,6 +37,8 @@
 (setq-default comment-column 70)
 (setq-default line-spacing 2)
 
+(setq column-number-mode t)
+
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
@@ -78,6 +80,8 @@
 (setq auto-save-default nil)
 (setq backup-inhibited t)
 
+(add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+
 (projectile-global-mode)
 
 (blink-cursor-mode 0)
@@ -103,11 +107,11 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
 
-(let ((up (lambda (p) (directory-file-name (file-name-directory p)))))
+(cl-flet ((up (p) (directory-file-name (file-name-directory p))))
   (let* ((bin-path
-          (funcall up (file-truename "/usr/local/bin/erl")))
+          (up (file-truename "/usr/local/bin/erl")))
          (root-path
-          (funcall up (funcall up (funcall up bin-path))))
+          (up (up (up bin-path))))
          (erl-load-path
           (car (file-expand-wildcards (concat root-path "/lib/erlang/lib/tools-*/emacs")))))
     (setq load-path (cons erl-load-path load-path))
@@ -119,3 +123,37 @@
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+(defun asm-left-flush-directives (orig-fun &rest args)
+  (or
+   (and (looking-at "\\.\\(\\sw\\|\\s_\\)+") 0)
+   (and (looking-at "@+\\(\\sw\\|\\s_\\)+:") 0)
+   (apply orig-fun args)))
+
+(with-eval-after-load "asm-mode"
+  (advice-add 'asm-calculate-indentation :around #'asm-left-flush-directives)
+  (setq asm-font-lock-keywords
+        (cons '("^\\(@+\\(\\sw\\|\\s_\\)+\\)\\>:"
+                1 font-lock-function-name-face)
+              (mapcar (lambda (entry)
+                        (if (string-equal (car entry) "^\\(\\.\\(\\sw\\|\\s_\\)+\\)\\>[^:]?")
+                            (cons (car entry) '(1 font-lock-function-name-face))
+                          entry)) asm-font-lock-keywords)))
+  (defun improve-asm-font-lock-defaults ()
+    (set (make-local-variable 'font-lock-defaults) '(asm-font-lock-keywords)))
+  (add-hook 'asm-mode-hook 'improve-asm-font-lock-defaults))
+
+
+(defun asm-period-key ()
+  "Insert a colon; if it follows a label, delete the label's indentation."
+  (interactive)
+  (let ((directivep nil))
+    (save-excursion
+      (skip-syntax-backward " ")
+      (if (setq directivep (bolp)) (delete-horizontal-space)))
+    (call-interactively 'self-insert-command)))
+
+(defun expand-asm-keymap ()
+  (define-key asm-mode-map "." 'asm-period-key))
+
+(add-hook 'asm-mode-set-comment-hook 'expand-asm-keymap)
