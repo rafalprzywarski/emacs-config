@@ -16,7 +16,7 @@
 (windmove-default-keybindings 'super)
 
 (set-language-environment "UTF-8")
-(set-default-font
+(set-frame-font
  (if (string-match "MBP" system-name)
      "Iosevka-11"
      "Iosevka-13") nil t)
@@ -66,7 +66,7 @@
  '(markdown-command "pandoc")
  '(package-selected-packages
    (quote
-    (ninja-mode markdown-mode magit paredit projectile smooth-scrolling helm-ag highlight-symbol rainbow-delimiters monokai-theme company cider))))
+    (exec-path-from-shell ninja-mode markdown-mode magit paredit projectile smooth-scrolling helm-ag highlight-symbol rainbow-delimiters monokai-theme company cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -116,3 +116,6 @@
 
 (require 'erlang-start)
 (put 'downcase-region 'disabled nil)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
